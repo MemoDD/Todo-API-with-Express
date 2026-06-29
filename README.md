@@ -1,5 +1,5 @@
 # Todo-API-with-Express
-This API shows the fundamentals of backend showing CRUD operations.You can read todos, insert new to-do, update existing one and delete the exact one you want.Its simple API built using Nde.js and Express as a part of my learning  journey in backend development.
+This API shows the fundamentals of backend showing CRUD operations.You can read todos, insert new to-do, update existing one and delete the exact one you want.Its simple API built using Node.js and Express as a part of my learning  journey in backend development.
 
 
 ##  Features
@@ -29,29 +29,24 @@ Your API will run at http://localhost:3000
 
 ## Handling API POST/UPDATE/DELETE requests
 - step 1 : Download Postman or curl (command-line url processor present in your terminal)
-- step 2 : For Postman {
-1. Download Postman from postman.com/downloads.
+- step 2 : For Postman :
 
-2.Install and open the app.
-
-3.Click New → Request.
-
-4.Choose method POST, enter URL http://localhost:3000/todos.
-
-5.Go to Body → raw → JSON and type:
-
-ex - json
-{ "task": "Finish backend basics" }
-
-6.Click Send → you’ll see the response neatly formatted.
-}
+        1. Download Postman from postman.com/downloads.  
+        2.Install and open the app.  
+        3.Click New → Request.
+        4.Choose method POST, enter URL http://localhost:3000/todos.
+        5.Go to Body → raw → JSON and type:
+         ex - json
+            { "task": "Finish backend basics" }
+        6.Click Send → you’ll see the response neatly formatted.
+                            
 
 
 - step 2 : For Curl(in Powersheell) {
-    Get all todos
-curl http://localhost:3000/todos
+   Get all todos
+        curl http://localhost:3000/todos
 
-    Get todo with ID 2
+        Get todo with ID 2
 curl http://localhost:3000/todos/2
 
      Add a new todo
