@@ -1,0 +1,19 @@
+{
+  "name": "todo-api",
+  "version": "1.0.0",
+  "description": "Project to crud todo api functions",
+  "repository": {
+    "type": "git",
+    "url": "Todo Api"
+  },
+  "license": "ISC",
+  "author": "Memo",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
