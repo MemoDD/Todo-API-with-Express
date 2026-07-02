@@ -31,13 +31,27 @@ const todo = todos.find(t=>t.id===id);
 if(!todo){return res.status(404).json(" todo not found.")}
 res.json(todo);
 })
+//route to mark tasks completed
+app.patch('/todos/:id',(req,res)=>{
+const id = parseInt(req.params.id);
+const todo = todos.find(t=>t.id===id);
+if(!todo){return res.status(404).json(" todo not found.")}
+todo.completed= (!todo).completed;
+res.json(todo);
+})
 app.post('/todos',(req,res)=>{
+    //Validating client's request 
     if(!req.body.task){res.status(404).json(" Task is mandatory. Please write the task.")}
-const newtodo={id:(todos.length+1),task:req.body.task}
+const newtodo={id:(todos.length+1),task:req.body.task,completed:false};
 todos.push(newtodo);
 saveTodo();
 res.status(201).json(newtodo);
+
 })
+
+//
+
+// fitering search by completed Tasks
 app.put('/todos/:id',(req,res)=>{
 const id = parseInt(req.params.id);
 const todo= todos.find(t=>t.id===id)
