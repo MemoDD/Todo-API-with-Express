@@ -22,23 +22,36 @@ app.get('/',(req,res)=>{
 });
  
 app.get('/todos',(req,res)=>{
-    res.json(todos);
+   
+  const { completed, page = 1, limit = 5 } = req.query;
+
+  let results = todos;
+
+  // Filtering
+  if (completed !== undefined) {
+    const isCompleted = completed === "true";
+    results = results.filter(t => t.completed === isCompleted);
+  }
+
+  // Pagination
+  const pagenum=parseInt(page);
+  const limitNum= parseInt(limit);
+
+  const start = (pagenum - 1) * limitNum;
+  const paginated = results.slice(start, start + limitNum);
+
+  res.json(paginated);
 });
 
+
+// get tasks by id
 app.get('/todos/:id',(req,res)=>{
 const id = parseInt(req.params.id);
 const todo = todos.find(t=>t.id===id);
 if(!todo){return res.status(404).json(" todo not found.")}
 res.json(todo);
 })
-//route to mark tasks completed
-app.patch('/todos/:id',(req,res)=>{
-const id = parseInt(req.params.id);
-const todo = todos.find(t=>t.id===id);
-if(!todo){return res.status(404).json(" todo not found.")}
-todo.completed= (!todo).completed;
-res.json(todo);
-})
+
 app.post('/todos',(req,res)=>{
     //Validating client's request 
     if(!req.body.task){res.status(404).json(" Task is mandatory. Please write the task.")}
@@ -49,9 +62,6 @@ res.status(201).json(newtodo);
 
 })
 
-//
-
-// fitering search by completed Tasks
 app.put('/todos/:id',(req,res)=>{
 const id = parseInt(req.params.id);
 const todo= todos.find(t=>t.id===id)
@@ -70,6 +80,17 @@ app.delete('/todos/:id',(req,res)=>{
     saveTodo();
     res.json(deletedtodo);
 })
+//route to mark tasks completed
+app.patch('/todos/:id',(req,res)=>{
+const id = parseInt(req.params.id);
+const todo = todos.find(t=>t.id===id);
+if(!todo){return res.status(404).json(" todo not found.")}
+todo.completed= !todo.completed;
+saveTodo();
+res.json(todo);
+})
+
+
 
 app.listen(port,()=>{
     console.log(`Server running at port ${port}`);

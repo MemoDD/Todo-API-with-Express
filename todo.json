@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "id": 1,
+    "task": "Learn node.js",
+    "completed": true
+  },
+  {
+    "id": 2,
+    "task": "Learn Express",
+    "completed": true
+  },
+  {
+    "id": 3,
+    "task": "Learn Database persistence",
+    "completed": true
+  },
+  {
+    "id": 4,
+    "task": "Create frontend",
+    "completed": false
+  },
+  {
+    "id": 5,
+    "task": "Connect frontend to backend by connecting node.js to script.js",
+    "completed": false
+  },
+  {
+    "id": 6,
+    "task": "Create full working website",
+    "completed": false
+  },
+  {
+    "id": 7,
+    "task": "Create full working website",
+    "completed": false
+  }
+]
