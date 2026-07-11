@@ -1,30 +1,10 @@
+const connect = require('./db');
+const Todo = require('./model');
 const express = require("express");
 const app = express();
-const path = require("path");
 const port = 3000;
-const mongoose =require("mongoose");
-//connection
-mongoose.connect('mongodb://127.0.0.1:27017/todo-tasks-manager')
-.then(()=> console.log("Mogodb connected."))
-.catch((err)=>console.log("error:"+ err));
 
-/*Using database to handle data*/
-
-const taskSchema = new mongoose.Schema({
-id:{type: Number,
-    unique: true,
-},
-task:{
-    type: String,
-    required: true,
-},
-completed: { type: Boolean, default:false},
-
-
-})
-
-//Creating db model
-const Todo = new mongoose.model("Todo",taskSchema);
+connect();
 
 app.use(express.json());
 app.get('/',(req,res)=>{
