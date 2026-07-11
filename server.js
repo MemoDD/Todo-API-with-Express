@@ -1,5 +1,6 @@
 const connect = require('./db');
 const Todo = require('./model');
+const joi = require('joi');
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -24,8 +25,16 @@ if(!todo){return res.status(404).json(" todo not found.")}
 res.json(todo);
 })
 app.post('/todos',async(req,res)=>{
-    //Validating client's request 
-    if(!req.body.task){res.status(404).json(" Task is mandatory. Please write the task.")}
+    //Validating client's request using JOI
+    const todoSchema = new joi.object({
+Task: joi.string().min(3).max(100).required(),
+completed: joi.boolean().default(false),
+    })
+const {error}=  todoSchema.validate(req.body);
+if (error) {
+    return res.status(400).json({ error: error.details[0].message });
+  }  
+  try{ 
 const last = await Todo.findOne().sort({ id: -1 });
   const nextId = last ? last.id + 1 : 1;
     const result = await Todo.create({
@@ -33,10 +42,12 @@ const last = await Todo.findOne().sort({ id: -1 });
     task:req.body.task,
     completed:false
 })
-res.status(201).json(result);
+res.status(201).json(result);}
+catch(e){
+    res.status(500).send(e);
+}
 })
 
-// fitering search by completed Tasks
 app.put('/todos/:id',async(req,res)=>{
 const id = parseInt(req.params.id);
 const todo= await Todo.findOneAndUpdate(
