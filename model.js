@@ -9,6 +9,8 @@ S_no:{
 task:{
     type:String,
     required:true,
+    minlength:3,
+    maxlength:100,
 },
 completed:{
     type:Boolean,
